@@ -1,7 +1,9 @@
 import "./list.css";
-import { Accordion } from "react-bootstrap";
+import { useState } from "react";
+import { Accordion, Button } from "react-bootstrap";
 import { age, getMyAvatar, getMyName } from "../util/util.js";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+import Modal from "react-bootstrap/Modal";
 
 const widthOfAccordion = "50%";
 
@@ -11,6 +13,27 @@ const marginRight20 = {
 
 const List = (props) => {
   const { celebrityList } = props;
+  const [data, setData] = useState(celebrityList);
+  const [deleteId, setDeleteId] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const deleteHandler = (idToDelete) => {
+    setDeleteId(idToDelete);
+    setShow(true);
+  };
+
+  const deleteItemFromData = () => {
+    const newData = data.filter((item) => {
+      return item.id !== deleteId;
+    });
+    setData(newData);
+    setDeleteId("");
+    handleClose();
+  };
 
   const renderList = () => {
     const createItem = (item, index) => {
@@ -46,7 +69,14 @@ const List = (props) => {
               <div class="row" style={marginRight20}>
                 <div class="col text-right">
                   <BsFillTrashFill
-                    style={{ marginRight: "10px", color: "red" }}
+                    onClick={() => {
+                      deleteHandler(item.id);
+                    }}
+                    style={{
+                      marginRight: "10px",
+                      color: "red",
+                      cursor: "pointer",
+                    }}
                   />
                   <BsFillPencilFill style={{ color: "blue" }} />
                 </div>
@@ -57,11 +87,27 @@ const List = (props) => {
       );
     };
 
-    const items = celebrityList.map((item, index) => {
+    const items = data.map((item, index) => {
       return createItem(item, index);
     });
 
-    return <Accordion className="mt-5 p-3">{items}</Accordion>;
+    return (
+      <>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton></Modal.Header>
+          <Modal.Body closeButton>Are you sure you want to delete?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={deleteItemFromData}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Accordion className="mt-5 p-3">{items}</Accordion>
+      </>
+    );
   };
 
   const renderError = () => {
