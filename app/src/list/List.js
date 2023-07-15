@@ -1,8 +1,13 @@
 import "./list.css";
 import { useState } from "react";
-import { Accordion, Button } from "react-bootstrap";
+import { Accordion, Button, DropdownButton, Dropdown } from "react-bootstrap";
 import { age, getMyAvatar, getMyName } from "../util/util.js";
-import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+import {
+  BsFillTrashFill,
+  BsFillPencilFill,
+  BsXCircle,
+  BsCheckCircle,
+} from "react-icons/bs";
 import Modal from "react-bootstrap/Modal";
 
 const widthOfAccordion = "50%";
@@ -11,14 +16,40 @@ const marginRight20 = {
   marginTop: "20px",
 };
 
+const textarea = {
+  border: "1px solid #cccccc",
+  borderRadius: "10px",
+  padding: "10px",
+  overflow: "hidden",
+};
+
+const inputElement = {
+  border: "1px solid #cccccc",
+  borderRadius: "10px",
+  padding: "2px",
+  width: "120px",
+};
+
 const List = (props) => {
   const { celebrityList } = props;
   const [data, setData] = useState(celebrityList);
   const [deleteId, setDeleteId] = useState("");
   const [show, setShow] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   const handleClose = () => {
     setShow(false);
+  };
+
+  const editToggler = (status) => {
+    setEditMode(status);
+  };
+
+  const editRecordHandler = (idToEdit) => {
+    if (idToEdit) {
+    } else {
+      return false;
+    }
   };
 
   const deleteHandler = (idToDelete) => {
@@ -37,10 +68,14 @@ const List = (props) => {
 
   const renderList = () => {
     const createItem = (item, index) => {
-      console.log(item);
       const dob = item?.dob?.split("-");
       const birthdate = new Date(...dob);
-      let myAge = age(birthdate);
+      const myAge = age(birthdate);
+
+      const ageFieldName = `age${item.id}`;
+      const genderFieldName = `gender${item.id}`;
+      const countryFieldName = `country${item.id}`;
+      const descriptionFieldName = `description${item.id}`;
 
       return (
         <Accordion.Item eventKey={index} className="item">
@@ -56,30 +91,96 @@ const List = (props) => {
                 <div class="col text-left text-muted">Country</div>
               </div>
               <div class="row">
-                <div class="col text-left">{myAge}</div>
-                <div class="col text-left">{item.gender}</div>
-                <div class="col text-left">{item.country}</div>
+                {editMode ? (
+                  <div class="col text-left">
+                    <input
+                      name={ageFieldName}
+                      value={myAge}
+                      style={inputElement}
+                    ></input>
+                  </div>
+                ) : (
+                  <div class="col text-left">{myAge}</div>
+                )}
+                {editMode ? (
+                  <div class="col text-left">
+                    <select name={genderFieldName} style={inputElement}>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Transgender">Transgender</option>
+                      <option value="Rather not say">Rather not say</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                ) : (
+                  <div class="col text-left">{item.gender}</div>
+                )}
+                {editMode ? (
+                  <div class="col text-left">
+                    <input
+                      name={countryFieldName}
+                      value={item.country}
+                      style={inputElement}
+                    ></input>
+                  </div>
+                ) : (
+                  <div class="col text-left">{item.country}</div>
+                )}
               </div>
               <div class="row" style={marginRight20}>
                 <div class="col text-left text-muted">Description</div>
               </div>
               <div class="row">
-                <div class="col text-left">{item.description}</div>
+                {editMode ? (
+                  <div>
+                    <textarea rows="4" cols="55" style={textarea}>
+                      {item.description}
+                    </textarea>
+                  </div>
+                ) : (
+                  <div class="col text-left">{item.description}</div>
+                )}
               </div>
               <div class="row" style={marginRight20}>
-                <div class="col text-right">
-                  <BsFillTrashFill
-                    onClick={() => {
-                      deleteHandler(item.id);
-                    }}
-                    style={{
-                      marginRight: "10px",
-                      color: "red",
-                      cursor: "pointer",
-                    }}
-                  />
-                  <BsFillPencilFill style={{ color: "blue" }} />
-                </div>
+                {editMode ? (
+                  <div class="col text-right">
+                    <BsXCircle
+                      size={30}
+                      style={{ color: "red" }}
+                      onClick={() => {
+                        editToggler(false);
+                      }}
+                    />
+                    <BsCheckCircle
+                      size={30}
+                      style={{ color: "green", width: "40px" }}
+                      onClick={() => {
+                        editRecordHandler(item.id);
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div class="col text-right">
+                    <BsFillTrashFill
+                      size={20}
+                      onClick={() => {
+                        deleteHandler(item.id);
+                      }}
+                      style={{
+                        marginRight: "10px",
+                        color: "red",
+                        cursor: "pointer",
+                      }}
+                    />
+                    <BsFillPencilFill
+                      size={20}
+                      onClick={() => {
+                        editToggler(true);
+                      }}
+                      style={{ color: "blue" }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </Accordion.Body>
