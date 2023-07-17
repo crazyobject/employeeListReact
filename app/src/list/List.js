@@ -1,9 +1,9 @@
-import './list.css';
-import { useState } from 'react';
-import Celebrities from './Celebrities';
-import DeleteCelebrity from './DeleteCelebrity';
-
-const widthOfAccordion = '50%';
+import "./list.css";
+import { useState } from "react";
+import Celebrities from "./Celebrities";
+import DeleteCelebrity from "./DeleteCelebrity";
+import Search from "./Search";
+const widthOfAccordion = "50%";
 
 const List = ({ celebrityList }) => {
   const [updatedCelebrityList, setUpdatedCelebrityList] =
@@ -43,13 +43,19 @@ const List = ({ celebrityList }) => {
 
   return (
     <div style={{ width: widthOfAccordion }}>
+      <Search
+        celebrityList={celebrityList}
+        setUpdatedCelebrityList={setUpdatedCelebrityList}
+      />
       {updatedCelebrityList.length ? (
-        <Celebrities
-          celebrityList={updatedCelebrityList}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
-          setUpdatedCelebrityList={setUpdatedCelebrityList}
-        />
+        <>
+          <Celebrities
+            celebrityList={updatedCelebrityList}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            setUpdatedCelebrityList={setUpdatedCelebrityList}
+          />
+        </>
       ) : (
         <p>No celebrity found</p>
       )}
