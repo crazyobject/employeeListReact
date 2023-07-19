@@ -1,8 +1,9 @@
-import React from 'react';
-import { Accordion } from 'react-bootstrap';
-import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs';
-import { age, getMyAvatar, getMyName } from '../util/util.js';
-import EditCelebrity from './EditCelebrity.js';
+import React from "react";
+import { Accordion } from "react-bootstrap";
+import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
+import { age, getMyAvatar, getMyName } from "../util/util.js";
+import EditCelebrity from "./EditCelebrity.js";
+import "./celebrities.css"
 
 const Celebrities = ({
   celebrityList,
@@ -11,19 +12,19 @@ const Celebrities = ({
   setUpdatedCelebrityList,
 }) => {
   const displayAge = (dob) => {
-    const newDob = dob?.split('-');
+    const newDob = dob?.split("-");
     const birthdate = new Date(...newDob);
     return age(birthdate);
   };
   return (
-    <Accordion className="mt-5 p-3">
+    <Accordion>
       {celebrityList.map((celebrity, index) => (
         <Accordion.Item
           eventKey={index}
           key={index + celebrity.first}
           className="item"
         >
-          <Accordion.Header>
+          <Accordion.Header style={{ padding: "-20px" }}>
             {getMyAvatar(celebrity.picture)}
             {getMyName(celebrity.first, celebrity.last)}
           </Accordion.Header>
@@ -56,9 +57,9 @@ const Celebrities = ({
                         handleDelete(celebrity.id);
                       }}
                       style={{
-                        marginRight: '10px',
-                        color: 'red',
-                        cursor: 'pointer',
+                        marginRight: "10px",
+                        color: "red",
+                        cursor: "pointer",
                       }}
                     />
                     <BsFillPencilFill
@@ -66,7 +67,7 @@ const Celebrities = ({
                       onClick={() => {
                         handleEdit(celebrity.id);
                       }}
-                      style={{ color: 'blue', cursor: 'pointer' }}
+                      style={{ color: "blue", cursor: "pointer" }}
                     />
                   </div>
                 </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Celebrities from "./Celebrities";
 import DeleteCelebrity from "./DeleteCelebrity";
 import Search from "./Search";
+
 const widthOfAccordion = "50%";
 
 const List = ({ celebrityList }) => {
@@ -43,6 +44,7 @@ const List = ({ celebrityList }) => {
 
   return (
     <div style={{ width: widthOfAccordion }}>
+      <br />
       <Search
         celebrityList={celebrityList}
         setUpdatedCelebrityList={setUpdatedCelebrityList}
@@ -57,7 +59,7 @@ const List = ({ celebrityList }) => {
           />
         </>
       ) : (
-        <p>No celebrity found</p>
+        <p>Not found</p>
       )}
       {isDeleteCelebrity && (
         <DeleteCelebrity
