@@ -4,7 +4,7 @@
 3. Data fetch from JSON.<br />
 4. Search with debounce action integrated in search box.<br />
 5. react-bootstrap integrated for accordion and other UI elements. <br />
-6. Delete & edit employee. <br />
+6. Create, edit & Delete employee. <br />
 
 # Kickstart
 1. checkout the repository
@@ -13,3 +13,6 @@
 
 ## Demo - add new employee
 ![Debounce React Input](./app/create-new.gif)
+
+## Demo - edit/delete and search functions
+![Debounce React Input](./app/main-app.gif)
