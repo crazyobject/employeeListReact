@@ -3,7 +3,7 @@ import { Accordion } from "react-bootstrap";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { age, getMyAvatar, getMyName } from "../util/util.js";
 import EditCelebrity from "./EditCelebrity.js";
-import "./celebrities.css"
+import "./celebrities.css";
 
 const Celebrities = ({
   celebrityList,

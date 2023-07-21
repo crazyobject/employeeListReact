@@ -1,0 +1,7 @@
+.accordionContainer{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.accordionContainer .item{
+    padding:10px;
+}

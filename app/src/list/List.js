@@ -3,8 +3,9 @@ import { useState } from "react";
 import Celebrities from "./Celebrities";
 import DeleteCelebrity from "./DeleteCelebrity";
 import Search from "./Search";
+import NewEmployee from "./NewEmployee";
 
-const widthOfAccordion = "50%";
+const widthOfAccordion = "60%";
 
 const List = ({ celebrityList }) => {
   const [updatedCelebrityList, setUpdatedCelebrityList] =
@@ -43,9 +44,13 @@ const List = ({ celebrityList }) => {
   };
 
   return (
-    <div style={{ width: widthOfAccordion }}>
+    <div style={{ width: widthOfAccordion, margin: "auto" }}>
       <br />
       <Search
+        celebrityList={celebrityList}
+        setUpdatedCelebrityList={setUpdatedCelebrityList}
+      />
+      <NewEmployee
         celebrityList={celebrityList}
         setUpdatedCelebrityList={setUpdatedCelebrityList}
       />
