@@ -6,6 +6,9 @@
 5. react-bootstrap integrated for accordion and other UI elements. <br />
 6. Create, edit & Delete employee. <br />
 
+## Live app on stackblitz<br/>
+[https://stackblitz.com/edit/react-bootstrap-crud-operations?file=src%2FApp.js](https://stackblitz.com/edit/react-bootstrap-crud-operations?file=src%2FApp.js)
+
 # Kickstart
 1. checkout the repository
 2. cd app
