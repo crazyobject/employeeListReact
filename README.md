@@ -5,6 +5,7 @@
 4. Search with debounce action integrated in search box.<br />
 5. react-bootstrap integrated for accordion and other UI elements. <br />
 6. Create, edit & Delete employee. <br />
+7. Mark todo as favourite. 
 
 ## Live app on stackblitz<br/>
 [https://stackblitz.com/edit/react-bootstrap-crud-operations?file=src%2FApp.js](https://stackblitz.com/edit/react-bootstrap-crud-operations?file=src%2FApp.js)
