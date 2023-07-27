@@ -13,7 +13,8 @@
 # Kickstart
 1. checkout the repository
 2. cd app
-3. npm start
+3. npm install
+4. npm start
 
 ## Demo - add new employee
 ![Debounce React Input](./app/create-new.gif)
