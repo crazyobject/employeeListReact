@@ -1,4 +1,4 @@
-# Simple employee list with edit and delete operations.
+# Simple employee list with add edit and delete & search operations. (CRUD)
 1. Small React app to manage Employee list. <br />
 2. You can view the list of employees. <br />
 3. Data fetch from JSON.<br />
